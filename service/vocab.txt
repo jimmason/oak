@@ -1,0 +1,501 @@
+# ============ NATURE: landscapes ============
+landscape
+mountain
+mountain peak
+mountain range
+alpine meadow
+valley
+canyon
+cliff
+rolling hills
+moorland
+heathland
+forest
+woodland
+pine forest
+rainforest
+jungle
+tree
+lone tree
+autumn foliage
+meadow
+grassland
+prairie
+field of flowers
+desert
+sand dunes
+beach
+rocky coastline
+sea cliffs
+ocean
+waves
+lake
+pond
+river
+stream
+waterfall
+marsh
+wetland
+swamp
+glacier
+iceberg
+volcano
+hot spring
+cave
+rock formation
+countryside
+island
+
+# ============ NATURE: sky & weather ============
+sunset
+sunrise
+golden hour
+blue hour
+dramatic sky
+storm clouds
+clouds
+rainbow
+lightning
+night sky
+starry sky
+milky way
+aurora borealis
+full moon
+fog
+mist
+rain
+snow
+frost
+ice
+hail
+sunbeams
+
+# ============ NATURE: flora ============
+flower
+wildflowers
+rose
+tulip
+sunflower
+daffodil
+bluebells
+poppy
+orchid
+lavender field
+cherry blossom
+autumn leaves
+fern
+moss
+mushroom
+cactus
+succulent plant
+bamboo
+ivy
+tree bark
+pine cone
+acorn
+berries
+
+# ============ DOG BREEDS ============
+labrador retriever
+golden retriever
+german shepherd
+french bulldog
+english bulldog
+poodle
+beagle
+rottweiler
+dachshund
+pembroke welsh corgi
+yorkshire terrier
+boxer dog
+siberian husky
+alaskan malamute
+great dane
+doberman pinscher
+australian shepherd
+border collie
+rough collie
+shetland sheepdog
+cavalier king charles spaniel
+english springer spaniel
+cocker spaniel
+shih tzu
+pomeranian
+chihuahua
+pug
+maltese dog
+havanese
+bichon frise
+boston terrier
+bernese mountain dog
+saint bernard
+newfoundland dog
+mastiff
+bullmastiff
+staffordshire bull terrier
+american pit bull terrier
+jack russell terrier
+west highland white terrier
+scottish terrier
+airedale terrier
+bull terrier
+schnauzer
+akita
+shiba inu
+samoyed
+chow chow
+dalmatian
+weimaraner
+vizsla
+rhodesian ridgeback
+basset hound
+bloodhound
+greyhound
+whippet
+irish wolfhound
+afghan hound
+basenji
+pointer dog
+irish setter
+english setter
+brittany spaniel
+chesapeake bay retriever
+flat-coated retriever
+old english sheepdog
+belgian malinois
+leonberger
+bearded collie
+lurcher
+mixed breed dog
+puppy
+
+# ============ ANIMALS: pets & farm ============
+dog
+cat
+kitten
+rabbit
+guinea pig
+hamster
+horse
+pony
+foal
+donkey
+cow
+calf
+bull
+sheep
+lamb
+goat
+pig
+piglet
+chicken
+rooster
+duck
+goose
+turkey
+alpaca
+llama
+
+# ============ ANIMALS: wild mammals ============
+wildlife
+fox
+red fox
+badger
+otter
+hedgehog
+squirrel
+red squirrel
+deer
+red deer stag
+roe deer
+fallow deer
+hare
+mouse
+rat
+bat
+mole
+weasel
+stoat
+pine marten
+wild boar
+wolf
+bear
+brown bear
+polar bear
+lion
+tiger
+leopard
+cheetah
+lynx
+elephant
+giraffe
+zebra
+rhinoceros
+hippopotamus
+monkey
+gorilla
+chimpanzee
+orangutan
+kangaroo
+koala
+panda
+red panda
+raccoon
+skunk
+moose
+elk
+bison
+camel
+meerkat
+sloth
+
+# ============ ANIMALS: birds ============
+bird
+robin
+blackbird
+blue tit
+great tit
+wren
+sparrow
+finch
+goldfinch
+chaffinch
+starling
+magpie
+crow
+raven
+jackdaw
+jay
+woodpecker
+kingfisher
+swallow
+swift
+pigeon
+dove
+seagull
+puffin
+gannet
+cormorant
+heron
+egret
+swan
+mallard duck
+moorhen
+kestrel
+buzzard
+red kite
+sparrowhawk
+peregrine falcon
+eagle
+golden eagle
+osprey
+owl
+barn owl
+tawny owl
+pheasant
+partridge
+grouse
+lapwing
+curlew
+oystercatcher
+flamingo
+peacock
+parrot
+penguin
+ostrich
+hummingbird
+pelican
+stork
+crane bird
+
+# ============ ANIMALS: reptiles, amphibians & fish ============
+lizard
+gecko
+snake
+grass snake
+adder
+tortoise
+turtle
+sea turtle
+crocodile
+alligator
+frog
+toad
+newt
+salamander
+fish
+koi carp
+salmon
+trout
+pike
+shark
+ray fish
+seahorse
+jellyfish
+octopus
+crab
+lobster
+starfish
+sea anemone
+seal
+sea lion
+dolphin
+whale
+orca
+
+# ============ ANIMALS: insects & invertebrates ============
+insect
+butterfly
+red admiral butterfly
+peacock butterfly
+tortoiseshell butterfly
+moth
+caterpillar
+dragonfly
+damselfly
+bee
+bumblebee
+honeybee
+wasp
+hoverfly
+ladybird
+beetle
+stag beetle
+grasshopper
+cricket
+ant
+spider
+spider web
+snail
+slug
+earthworm
+centipede
+woodlouse
+
+# ============ CAMERA GEAR (as photo subjects) ============
+camera
+vintage camera
+film camera
+dslr camera
+mirrorless camera
+instant camera
+canon camera
+nikon camera
+sony camera
+fujifilm camera
+leica camera
+olympus camera
+pentax camera
+hasselblad camera
+polaroid camera
+camera lens
+tripod
+camera bag
+darkroom equipment
+film rolls
+photography studio
+
+# ============ GENERAL: people ============
+portrait
+group photo
+family photo
+child
+baby
+couple
+wedding
+bride
+selfie
+crowd
+silhouette of a person
+
+# ============ GENERAL: urban & man-made ============
+cityscape
+architecture
+building
+skyscraper
+bridge
+street
+church
+cathedral
+castle
+ruins
+lighthouse
+windmill
+barn
+cottage
+garden
+park
+farm
+market
+harbor
+pier
+fountain
+statue
+graffiti
+door
+window
+interior
+
+# ============ GENERAL: transport ============
+car
+classic car
+bicycle
+motorcycle
+train
+steam train
+airplane
+helicopter
+boat
+sailboat
+ship
+tractor
+bus
+
+# ============ GENERAL: activities ============
+sports
+running
+cycling
+swimming
+hiking
+camping
+fishing
+skiing
+surfing
+climbing
+football
+horse riding
+concert
+festival
+party
+picnic
+gardening
+cooking
+
+# ============ GENERAL: photography styles ============
+macro
+close-up
+black and white
+long exposure
+bokeh
+aerial view
+panorama
+reflection
+motion blur
+high key
+low key
+minimalist
+abstract
+still life
+street photography
+night photography
+underwater photography
+
+# ============ GENERAL: seasons & light ============
+spring
+summer
+autumn
+winter
+overcast
+sunny day
+shadow play
+backlit
