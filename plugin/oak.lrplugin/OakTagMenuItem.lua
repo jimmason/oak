@@ -2,8 +2,9 @@
 
 Exports a small JPEG preview of each selected photo, sends it to the local
 OAK inference service, then shows a review dialog where suggested keywords
-can be accepted or rejected per photo. Accepted keywords are applied under
-an "OAK" parent keyword so AI-added keywords stay auditable.
+can be accepted or rejected per photo and extra keywords can be typed in.
+Accepted keywords are applied under an "OAK" parent keyword so AI-added
+keywords stay auditable; typed keywords are also appended to the vocabulary.
 ]]
 
 local LrApplication = import "LrApplication"
@@ -109,10 +110,20 @@ local function applyKeywords(catalog, results)
 end
 
 --[[ Modal review dialog: one row per photo (thumbnail + keyword checkboxes,
-checked by default). Returns the approved subset of results, or nil if the
+checked by default, plus a free-text field for extra keywords). Returns the
+approved subset of results and a list of manually typed terms, or nil if the
 user cancelled. ]]
+local function splitTerms(s)
+    local terms = {}
+    for term in (s or ""):gmatch("[^,]+") do
+        local trimmed = term:match("^%s*(.-)%s*$")
+        if trimmed ~= "" then terms[#terms + 1] = trimmed end
+    end
+    return terms
+end
+
 local function showReviewDialog(results)
-    local approved = nil
+    local approved, newTerms = nil, nil
     LrFunctionContext.callWithContext("oakReview", function(context)
         local f = LrView.osFactory()
         local props = LrBinding.makePropertyTable(context)
@@ -131,9 +142,36 @@ local function showReviewDialog(results)
                     value = LrView.bind(key),
                 }
             end
+            props["p" .. pi .. "_extra"] = ""
             if pi > 1 then
                 photoRows[#photoRows + 1] = f:separator { fill_horizontal = 1 }
             end
+            local colItems = {
+                spacing = f:label_spacing(),
+                f:static_text {
+                    title = r.photo:getFormattedMetadata("fileName") or "",
+                    font = "<system/bold>",
+                },
+            }
+            if #checks > 0 then
+                for _, c in ipairs(checks) do
+                    colItems[#colItems + 1] = c
+                end
+            else
+                colItems[#colItems + 1] = f:static_text {
+                    title = "(no suggestions)",
+                    font = "<system/small>",
+                }
+            end
+            colItems[#colItems + 1] = f:row {
+                f:static_text { title = "Add keywords:",
+                                font = "<system/small>" },
+                f:edit_field {
+                    value = LrView.bind("p" .. pi .. "_extra"),
+                    width_in_chars = 24,
+                    immediate = true,
+                },
+            }
             photoRows[#photoRows + 1] = f:row {
                 spacing = f:control_spacing(),
                 f:catalog_photo {
@@ -142,14 +180,7 @@ local function showReviewDialog(results)
                     height = 140,
                     frame_width = 1,
                 },
-                f:column {
-                    spacing = f:label_spacing(),
-                    f:static_text {
-                        title = r.photo:getFormattedMetadata("fileName") or "",
-                        font = "<system/bold>",
-                    },
-                    unpack(checks),
-                },
+                f:column(colItems),
             }
         end
 
@@ -166,7 +197,9 @@ local function showReviewDialog(results)
                 f:static_text {
                     title = string.format(
                         "Review suggested keywords for %d photo%s. " ..
-                        "Unticked keywords will not be applied.",
+                        "Unticked keywords will not be applied.\n" ..
+                        "Typed keywords (comma-separated) are also added " ..
+                        "to the vocabulary for future runs.",
                         #results, #results == 1 and "" or "s"),
                     fill_horizontal = 1,
                 },
@@ -175,7 +208,7 @@ local function showReviewDialog(results)
             },
             f:scrolled_view {
                 width = 560,
-                height = math.min(500, 40 + #results * 160),
+                height = math.min(500, 40 + #results * 190),
                 f:column {
                     spacing = f:dialog_spacing(),
                     unpack(photoRows),
@@ -190,12 +223,20 @@ local function showReviewDialog(results)
         })
 
         if result == "ok" then
-            approved = {}
+            approved, newTerms = {}, {}
+            local seen = {}
             for pi, r in ipairs(results) do
                 local kept = {}
                 for ki, kw in ipairs(r.keywords) do
                     if props["p" .. pi .. "_k" .. ki] then
                         kept[#kept + 1] = kw
+                    end
+                end
+                for _, term in ipairs(splitTerms(props["p" .. pi .. "_extra"])) do
+                    kept[#kept + 1] = { keyword = term }
+                    if not seen[term:lower()] then
+                        seen[term:lower()] = true
+                        newTerms[#newTerms + 1] = term
                     end
                 end
                 if #kept > 0 then
@@ -204,7 +245,7 @@ local function showReviewDialog(results)
             end
         end
     end)
-    return approved
+    return approved, newTerms
 end
 
 LrTasks.startAsyncTask(function()
@@ -253,9 +294,7 @@ LrTasks.startAsyncTask(function()
         if data then
             local keywords, err = tagImage(data)
             if keywords then
-                if #keywords > 0 then
-                    results[#results + 1] = { photo = job.photo, keywords = keywords }
-                end
+                results[#results + 1] = { photo = job.photo, keywords = keywords }
             else
                 errors[#errors + 1] = err
             end
@@ -272,17 +311,20 @@ LrTasks.startAsyncTask(function()
     end
 
     if #results == 0 then
-        if #errors == 0 then
-            LrDialogs.message("OAK",
-                "No keywords were suggested for the selected photos.\n\n" ..
-                "Try adding relevant terms to vocab.txt, or lower the threshold.",
-                "info")
-        end
         return
     end
 
-    local approved = showReviewDialog(results)
-    if approved ~= nil and #approved > 0 then
-        applyKeywords(catalog, approved)
+    local approved, newTerms = showReviewDialog(results)
+    if approved ~= nil then
+        if #approved > 0 then
+            applyKeywords(catalog, approved)
+        end
+        -- Manually typed keywords also grow the vocabulary for future runs
+        if newTerms and #newTerms > 0 then
+            local added = OakServer.appendVocab(newTerms)
+            if added and added > 0 and OakServer.isRunning() then
+                OakServer.reloadVocab()
+            end
+        end
     end
 end)

@@ -499,3 +499,6 @@ overcast
 sunny day
 shadow play
 backlit
+
+# ============ added from review ============
+Highland cow

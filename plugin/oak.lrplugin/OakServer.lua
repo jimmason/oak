@@ -95,6 +95,35 @@ function OakServer.writeVocab(text)
     return true
 end
 
+--- Append new terms to the vocabulary file, skipping duplicates
+--- (case-insensitive). Returns the number of terms added, or nil + error.
+function OakServer.appendVocab(terms)
+    local text = OakServer.readVocab() or ""
+    local existing = {}
+    for line in text:gmatch("[^\r\n]+") do
+        local trimmed = line:match("^%s*(.-)%s*$")
+        if trimmed ~= "" and trimmed:sub(1, 1) ~= "#" then
+            existing[trimmed:lower()] = true
+        end
+    end
+    local toAdd = {}
+    for _, term in ipairs(terms) do
+        if not existing[term:lower()] then
+            existing[term:lower()] = true
+            toAdd[#toAdd + 1] = term
+        end
+    end
+    if #toAdd == 0 then return 0 end
+    if #text > 0 and not text:match("\n$") then text = text .. "\n" end
+    if not text:find("added from review", 1, true) then
+        text = text .. "\n# ============ added from review ============\n"
+    end
+    text = text .. table.concat(toAdd, "\n") .. "\n"
+    local ok, err = OakServer.writeVocab(text)
+    if not ok then return nil, err end
+    return #toAdd
+end
+
 --- Ask a running service to re-embed the vocabulary file.
 --- Returns keyword count, or nil + error.
 function OakServer.reloadVocab()

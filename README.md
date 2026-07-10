@@ -65,7 +65,8 @@ That's it. You don't need to start the service yourself — the plugin launches 
 2. Run **Library → Plug-in Extras → OAK: Suggest Keywords for Selected Photos**
 3. The first run starts the service and loads the model — this takes up to a minute (and the very first time ever, the ~800 MB model is downloaded). After that it's fast.
 4. Review the suggestions: every keyword has a checkbox (ticked by default) with its confidence score. Untick anything wrong, or use **Select All / Select None**.
-5. Click **Apply Keywords**.
+5. Missed something? Type it into the **Add keywords** field on any photo (comma-separated, e.g. `red kite, gliding`). Typed keywords are applied to that photo *and* added to the vocabulary automatically, so OAK can suggest them by itself next time.
+6. Click **Apply Keywords**.
 
 Applied keywords appear in the Keywording panel as e.g. `mountain < OAK` — that's Lightroom showing the keyword lives under the `OAK` parent. The parent keyword is excluded from export, so your exported files just get `mountain`.
 
@@ -88,6 +89,7 @@ Tips:
 - **Phrases are fine.** "long exposure waterfall", "snow-capped mountain", "golden hour" all work.
 - **Disambiguate homonyms.** Prefer "crane bird" over "crane" if you never photograph construction sites.
 - **Scale freely.** Thousands of keywords cost almost nothing per photo — the vocabulary is embedded once at startup (and on reload), not per image.
+- **Teach as you go.** Keywords you type in the review dialog are appended to the vocabulary automatically (under an `# added from review` section), so corrections become future suggestions.
 - **Prune what you never shoot.** Fewer irrelevant candidates means less noise in the suggestions.
 
 ## Troubleshooting
